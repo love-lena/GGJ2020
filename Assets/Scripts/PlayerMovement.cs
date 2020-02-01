@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
             mousePosition.x -= playerPosition.x;
             mousePosition.y -= playerPosition.y;
             angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
             Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0).normalized;
             transform.position += (speed * moveDirection * Time.deltaTime);
