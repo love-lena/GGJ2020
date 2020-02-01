@@ -9,6 +9,9 @@ public class HealthManager : MonoBehaviour
 	private float lose = 1f;
 
 	public bool dead = false;
+	public bool sucking = false;
+	public EnemyHealth sucker = null;
+	private float suckRate = 0f;
 
 	// Start is called before the first frame update
 	void Start()
@@ -17,11 +20,16 @@ public class HealthManager : MonoBehaviour
 		dead = false;
 	}
 
+	public void Restart() {
+		Start();
+	}
+
 	// Update is called once per frame
 	void Update()
 	{
 		if (! dead) {
-			health -= lose * Time.deltaTime;
+			float delta = Time.deltaTime;
+			health -= (lose * delta) - GetSuckedAmmount(delta);
 			if (health < 0) {
 				health = 0;
 				dead = true;
@@ -39,5 +47,24 @@ public class HealthManager : MonoBehaviour
 
 	public bool PlayerDead() {
 		return dead;
+	}
+
+	public void StartSucking(EnemyHealth enemy) {
+		enemy.StartSucking();
+		sucker = enemy;
+	}
+
+	public void StopSucking() {
+		sucker.StopSucking();
+		sucker = null;
+	}
+
+	private float GetSuckedAmmount(float delta) {
+		float ammount = 0f;
+		if (sucker != null) {
+			ammount = sucker.Sucked(delta);
+			if (!sucker.Suckable()) { StopSucking(); }
+		}
+		return ammount;
 	}
 }

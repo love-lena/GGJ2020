@@ -9,27 +9,29 @@ public class SuckingEnemy : MonoBehaviour
 
     void Start()
     {
+        healthManager = GameObject.FindWithTag("GameManager")
+            .GetComponent<HealthManager>();
         isSucking = false;
     }
 
-    void Update() { 
-}
+    void Update() { }
 
     //Goes on player
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag.Equals("enemy"))
+        if (!isSucking && collider.gameObject.tag.Equals("enemy"))
         {
             isSucking = true;
-            //healthManager.Sucking(collider.gameObject);
+            healthManager.StartSucking(collider.gameObject.GetComponent<EnemyHealth>());
         }
     }
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.tag.Equals("enemy"))
+        if (isSucking && collider.gameObject.tag.Equals("enemy"))
         {
             isSucking = false;
+            healthManager.StopSucking();
         }
     }
 }

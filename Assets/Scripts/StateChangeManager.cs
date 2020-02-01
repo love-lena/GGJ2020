@@ -20,6 +20,7 @@ public class StateChangeManager : MonoBehaviour
         {
             if(!Input.GetKeyDown(KeyCode.Escape) && Input.anyKey)
             {
+                healthManager.Restart();
                 gameState = "playing";
             }
 
