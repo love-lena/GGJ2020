@@ -49,4 +49,9 @@ public class StateChangeManager : MonoBehaviour
             }
         }
     }
+
+    public string GetState()
+    {
+        return gameState;
+    }
 }
