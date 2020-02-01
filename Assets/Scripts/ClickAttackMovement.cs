@@ -40,5 +40,6 @@ public class ClickAttackMovement : MonoBehaviour
         }
 
         canAttack = true;
+        GetComponent<PlayerMovement>().takingInput = true;
     }
 }
