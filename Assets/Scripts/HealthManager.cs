@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-	float maxHealth;
-	float health;
-	float lose;
+	private float maxHealth = 20f;
+	public float health = 20f;
+	private float lose = 1f;
+
+	public bool dead = false;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		maxHealth = health = 20f;
-		lose = 1f;
+		health = maxHealth;
+		dead = false;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		health -= lose * Time.deltaTime;
+		if (! dead) {
+			health -= lose * Time.deltaTime;
+			if (health < 0) {
+				health = 0;
+				dead = true;
+			}
+		}
 	}
 	
 	public float GetHealth() {

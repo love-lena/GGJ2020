@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-	float health;
-	float maxHealth;
-	GameObject gm;
-	HealthManager hs;
+	public float health;
+	public float maxHealth;
+	GameObject gameManager;
+	HealthManager healthManager;
 	GameObject mask;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		gm = GameObject.FindWithTag("GameManager");
-		mask = this.gameObject.transform.Find("HealthBarMask").gameObject;
-		hs = gm.GetComponent<HealthManager>();
-		health = hs.GetHealth();
-		maxHealth = hs.GetMaxHealth();
+		gameManager = GameObject.FindWithTag("GameManager");
+		mask = gameObject.transform.Find("HealthBarMask").gameObject;
+		healthManager = gameManager.GetComponent<HealthManager>();
+		health = healthManager.GetHealth();
+		maxHealth = healthManager.GetMaxHealth();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		health = hs.GetHealth();
+		health = healthManager.GetHealth();
 		mask.transform.localScale = new Vector3(health/maxHealth, 1, 1);
 	}
 }
