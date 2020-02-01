@@ -36,4 +36,8 @@ public class HealthManager : MonoBehaviour
 	public float GetMaxHealth() {
 		return maxHealth;
 	}
+
+	public bool PlayerDead() {
+		return dead;
+	}
 }
