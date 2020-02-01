@@ -24,8 +24,8 @@ public class ClickAttackMovement : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) && canAttack)
         {
-            Debug.Log("Attack!");
             StartCoroutine("Attack");
+            StartCoroutine("Cooldown");
         }
     }
 
@@ -46,8 +46,12 @@ public class ClickAttackMovement : MonoBehaviour
             yield return new WaitForSeconds(.01F);
         }
         //playerTrans.position += movementVec.normalized * Time.deltaTime * speed;
-
-        canAttack = true;
         yield return null;
+    }
+
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
     }
 }

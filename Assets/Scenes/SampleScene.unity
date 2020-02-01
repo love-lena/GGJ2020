@@ -662,10 +662,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5796959827168743150, guid: 7885ac81c8c4f5b47a2beca0fd5b9d77,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ef7e93762fdbbf04491ab42e9ab5b9aa,
+        type: 3}
+    - target: {fileID: 5796959827168743150, guid: 7885ac81c8c4f5b47a2beca0fd5b9d77,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8318236968270894984, guid: 7885ac81c8c4f5b47a2beca0fd5b9d77,
         type: 3}
       propertyPath: m_Name
       value: Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866846054563379486, guid: 7885ac81c8c4f5b47a2beca0fd5b9d77,
+        type: 3}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7885ac81c8c4f5b47a2beca0fd5b9d77, type: 3}
