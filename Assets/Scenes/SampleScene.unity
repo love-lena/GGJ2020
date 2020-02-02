@@ -172,6 +172,14 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
       value: -0.24999996
       objectReference: {fileID: 0}
+    - target: {fileID: 1880447804, guid: 94dfe5a457120c948a36f3f1aa4f70bf, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880447804, guid: 94dfe5a457120c948a36f3f1aa4f70bf, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 838730892215490689, guid: 94dfe5a457120c948a36f3f1aa4f70bf,
         type: 3}
       propertyPath: m_Name
