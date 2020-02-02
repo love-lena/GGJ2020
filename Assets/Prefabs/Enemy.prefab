@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5796959827168743150}
   - component: {fileID: 219800968}
   - component: {fileID: 2065337221}
-  - component: {fileID: 4228185703542163499}
   - component: {fileID: 8866846054563379486}
   - component: {fileID: 5073987855317426340}
+  - component: {fileID: 2500596926855236378}
+  - component: {fileID: 4087859014676291102}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -75,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8e1ed30f500c34b269cdf8803d5c3095, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6b620bfcf1af514bb0ce409eb7249a6, type: 3}
   m_Color: {r: 0.9098039, g: 0.75686276, b: 0.5058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.04, y: 0.04}
+  m_Size: {x: 0.26666668, y: 0.26666668}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -101,7 +102,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.19
 --- !u!50 &2065337221
 Rigidbody2D:
   serializedVersion: 4
@@ -123,19 +124,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4228185703542163499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8318236968270894984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c7f0cac980e74871b6b7bccd3933d37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalizeDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &8866846054563379486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,11 +133,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8318236968270894984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d4f455bddba4d14b213474c0faae86, type: 3}
+  m_Script: {fileID: 11500000, guid: 2617c92009fefdb42948f68fa0e6d6d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scared: 0
-  eyesight: 0
+  stationary: 0
+  eyesight: 3
+  timeSpentAfraid: 2
+  myState: 0
 --- !u!114 &5073987855317426340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +150,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 8318236968270894984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 943c47fe058f1439c89e3d50bb23ae8d, type: 3}
+  m_Script: {fileID: 11500000, guid: b69bdde2f268ceb479236688e37915f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  normalizeDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &2500596926855236378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8318236968270894984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de61ef065141a3b47ba74a664b1389be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 3
+  circleHits:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  numHits: 0
+--- !u!114 &4087859014676291102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8318236968270894984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe2775317e1a554e90c75803942534b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAvoidanceWeight: 3
+  wallAvoidanceWeight: 3
+  minSpacingAvoidanceWeight: 0.1
+  fearWeight: 6
+  chaseWeight: 1
+  fearSpeed: 3
+  chaseSpeed: 2
