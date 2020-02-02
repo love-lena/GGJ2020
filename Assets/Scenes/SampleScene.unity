@@ -264,6 +264,21 @@ PrefabInstance:
       propertyPath: controllerInput
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6685729333575813791, guid: 94dfe5a457120c948a36f3f1aa4f70bf,
+        type: 3}
+      propertyPath: dash
+      value: 
+      objectReference: {fileID: 1432895004}
+    - target: {fileID: 6685729333575813791, guid: 94dfe5a457120c948a36f3f1aa4f70bf,
+        type: 3}
+      propertyPath: batParticles
+      value: 
+      objectReference: {fileID: 100000, guid: d4f5579fb5da2f646a0c2bee91bdf6b5, type: 3}
+    - target: {fileID: 6685729333575813791, guid: 94dfe5a457120c948a36f3f1aa4f70bf,
+        type: 3}
+      propertyPath: leftPoof
+      value: 
+      objectReference: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94dfe5a457120c948a36f3f1aa4f70bf, type: 3}
 --- !u!1 &180613750
@@ -927,6 +942,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!82 &1432895004 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6196933661694256848, guid: 94dfe5a457120c948a36f3f1aa4f70bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 180106666}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1458578048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1266,6 +1287,8 @@ MonoBehaviour:
   attackTimer: 0
   readyToAttack: 1
   attackRechargeTimer: 0
+  batParticles: {fileID: 0}
+  leftPoof: {fileID: 0}
 --- !u!60 &1576478490
 PolygonCollider2D:
   m_ObjectHideFlags: 0

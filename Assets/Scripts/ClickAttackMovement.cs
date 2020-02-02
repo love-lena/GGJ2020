@@ -25,6 +25,10 @@ public class ClickAttackMovement : MonoBehaviour
     public float attackRechargeTimer = 0f;
     private Quaternion lockRotation;
     private Animator playerAnimation;
+    [SerializeField]
+    private GameObject batParticles;
+    [SerializeField]
+    private GameObject leftPoof;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +67,12 @@ public class ClickAttackMovement : MonoBehaviour
             playerAnimation.SetBool("Attacking", true);
             Invoke("EndAttack", .2f);
             lockRotation = transform.rotation;
+            GameObject bats = GameObject.Instantiate(batParticles, transform);
+            bats.transform.localPosition = new Vector3(0, 0, -1);
+            GameObject poof = GameObject.Instantiate(leftPoof);
+            poof.transform.position = gameObject.transform.position;
+                
+
             //attackCorInstance = StartCoroutine("Attack");
             //StartCoroutine("Cooldown");
             //GameObject.FindWithTag("Player").GetComponent<SuckingEnemy>().StartSucking();
