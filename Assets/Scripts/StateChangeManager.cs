@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class StateChangeManager : MonoBehaviour
 {
     private HealthManager healthManager;
     private string gameState;
+    [SerializeField]
+    private GameObject startScreen;
+    [SerializeField]
+    private GameObject endScreen;
+    private GameObject enemies;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +22,15 @@ public class StateChangeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (gameState.Equals("starting"))
+        if (gameState.Equals("starting"))
         {
-            if(!Input.GetKeyDown(KeyCode.Escape) && Input.anyKey)
+            if(Input.GetKeyDown("space"))
             {
-                gameState = "playing";
+                /*When the user places space the start screen is disabled*/
+                startScreen.SetActive(false);
+
+                /*spawn enemies at a location decided by the placement of the enemies gameObject*/
+                StartGame();
             }
 
             if(Input.GetKeyDown(KeyCode.Escape))
@@ -29,23 +39,22 @@ public class StateChangeManager : MonoBehaviour
             }
         }
 
-        while (gameState.Equals("playing"))
+        if (gameState.Equals("playing"))
         {
-            if(healthManager.GetHealth() >= 0.0)
+            if(healthManager.GetHealth() <= 0.0)
             {
                 gameState = "failed";
+                endScreen.SetActive(true);
             }
         }
 
-        while (gameState.Equals("failed"))
+        if (gameState.Equals("failed"))
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.R))
             {
-                gameState = "playing";
-            }
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                gameState = "starting";
+                GetComponent<EnemySpawner>().CleanUp();
+                endScreen.SetActive(false);
+                StartGame();
             }
         }
     }
@@ -53,5 +62,12 @@ public class StateChangeManager : MonoBehaviour
     public string GetState()
     {
         return gameState;
+    }
+
+    private void StartGame()
+    {
+        GetComponent<EnemySpawner>().Spawn();
+        gameState = "playing";
+        healthManager.health = healthManager.GetMaxHealth();
     }
 }

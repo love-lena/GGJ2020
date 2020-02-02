@@ -8,7 +8,8 @@ public class ClickAttackMovement : MonoBehaviour
     GameObject player;
     Transform playerTrans;
     private float speed;
-
+    private string gameState;
+    private GameObject gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,13 +17,14 @@ public class ClickAttackMovement : MonoBehaviour
         player = this.gameObject;
         playerTrans = player.GetComponent<Transform>();
         speed = 50.0F;
-
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && canAttack)
+        gameState = gameManager.GetComponent<StateChangeManager>().GetState();
+        if (Input.GetMouseButtonDown(0) && canAttack && (gameState == "playing"))
         {
             StartCoroutine("Attack");
             StartCoroutine("Cooldown");
