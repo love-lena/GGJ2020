@@ -14,33 +14,41 @@ public class SurvivalTimer : MonoBehaviour
     {
         timer = 0.0f;
         manager = this.gameObject.GetComponent<StateChangeManager>();
+        lastState = "starting";
     }
     
     // Update is called once per frame
     void Update()
     {
-        lastState = manager.GetState();
         if(lastState.Equals("starting") && manager.GetState().Equals("playing"))
         {
             runTimer = true;
+            lastState = "playing";
         }
 
-        if (lastState.Equals("playing") && manager.GetState().Equals("failed"))
+        else if (lastState.Equals("playing") && manager.GetState().Equals("failed"))
         {
             runTimer = false;
+            lastState = "failed";
         }
 
-        if (lastState.Equals("failed") && manager.GetState().Equals("playing"))
+        else if (lastState.Equals("failed") && manager.GetState().Equals("playing"))
         {
             timer = 0.0f;
             runTimer = true;
+            lastState = "playing";
         }
 
         if (runTimer)
         {
+            Debug.Log(timer);
             timer += Time.deltaTime;
         }
 
 
+    }
+
+    public float GetTimer() {
+        return timer;
     }
 }

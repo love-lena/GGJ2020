@@ -21,9 +21,9 @@ public class CircleHits : MonoBehaviour
 
     public Collider2D[] checkSurroundings()
     {
-        coll.enabled = false;
+        //coll.enabled = false;
         numHits = Physics2D.OverlapCircleNonAlloc(transform.position, checkRadius, circleHits);
-        coll.enabled = true;
+        //coll.enabled = true;
         return circleHits;
     }
     public int getNumHits()

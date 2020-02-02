@@ -9,61 +9,99 @@ public class VectorEnemyMovement : MonoBehaviour, EnemyMovementInterface
 
     private CircleHits circleHits;
     [SerializeField]
-    private float enemyAvoidanceWeight;
+    private float enemyAvoidanceWeight = 3f;
     [SerializeField]
-    private float wallAvoidanceWeight;
+    private float wallAvoidanceWeight = 3f;
     [SerializeField]
-    private float minSpacingAvoidanceWeight;
+    private float minSpacingAvoidanceWeight = 0.1f;
+    [SerializeField]
+    private float fearWeight = 6f;
+    [SerializeField]
+    private float chaseWeight = 1f;
+
+    [SerializeField]
+    private float fearSpeed = 3f;
+
+    [SerializeField]
+    private float chaseSpeed = 2f;
+    private bool amScared = false;
+
+    private GameObject player;
+    private bool stationary;
+
+    private float scaredMult;
+    private float speedMult;
     // Start is called before the first frame update
     void Start()
     {
+        scaredMult = chaseWeight;
+        speedMult = 1f;
+        stationary = false;
+        player = GameObject.FindGameObjectWithTag("Player");
         circleHits = GetComponent<CircleHits>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        getMoveVector(circleHits.checkSurroundings(), circleHits.getNumHits());
         
     }
 
     public Vector2 getDir()
     {
-        return Vector2.zero;
+        return getMoveVector(circleHits.checkSurroundings(), circleHits.getNumHits());
     }
 
     public float getSpeed()
     {
-        return 0;
+        if (!stationary)
+        {
+            return speedMult * (amScared ? fearSpeed : chaseSpeed);
+        }
+        return 0f;
     }
     private Vector2 getMoveVector(Collider2D[] hits, int hitNum)
     {
         Vector2 res = new Vector2();
         
-        //bool trailFound = false;
         for(int i = 0; i < hitNum; i ++)
         {
-            if (hits[i].tag == "Enemy") 
+            
+            if (hits[i].tag == "Enemy" && !(hits[i].gameObject.name == gameObject.name)) 
             {
                 res += getAvoidanceVector(hits[i].transform.position, hitNum, enemyAvoidanceWeight);
             }else if(hits[i].tag == "Wall"){
-
                 res += getAvoidanceVector(hits[i].transform.position, hitNum, wallAvoidanceWeight);
             }
         }
 
+        res += getPlayerVector();
         Debug.DrawLine(transform.position,
              transform.position + new Vector3(res.x, res.y, transform.position.z),
              Color.green,
-             2);
-        //res += getPlayerVector();
+             0.5f);
         return res;
 
     }
 
     public void setScared(bool scared)
     {
+        amScared = scared;
+        scaredMult = scared ? -fearWeight : chaseWeight;
+    }
+    public void setStationary(bool newStationary)
+    {
+        stationary = newStationary;
 
+    }
+    public void setSpeedMultiplier(float mult)
+    {
+        
+    }
+    
+    private Vector2 getPlayerVector()
+    {
+        return scaredMult * (((Vector2) player.transform.position - (Vector2) transform.position)).normalized;
     }
 
     private Vector2 getAvoidanceVector(Vector2 avoidPos, int numAvoiding, float avoidanceWeight)

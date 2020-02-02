@@ -12,11 +12,14 @@ public class SimpleEnemyMovement : MonoBehaviour, EnemyMovementInterface
     private float speed;
 
     private int scaredMult;
+    private float stationaryMult;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        stationaryMult = 1;
+        
         //1 for not scared, -1 for scared
         scaredMult = 1;
         player = GameObject.FindGameObjectWithTag("Player");
@@ -33,12 +36,22 @@ public class SimpleEnemyMovement : MonoBehaviour, EnemyMovementInterface
 
     public float getSpeed()
     {
-        return speed;
+        return speed * stationaryMult;
+    }
+
+    public void setSpeedMultiplier(float mult)
+    {
+        stationaryMult = mult;
+
     }
 
     public void setScared(bool scared)
     {
         scaredMult = scared ? -1 : 1;
+    }
+    public void setStationary(bool stationary)
+    {
+        stationaryMult = stationary ? 0 : 1;
     }
 
     // Update is called once per frame
