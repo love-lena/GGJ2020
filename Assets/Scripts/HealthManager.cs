@@ -14,20 +14,17 @@ public class HealthManager : MonoBehaviour
 	public SuckingEnemy suckingEnemy = null;
 	private PlayerMovement playerMovement;
 
-    [SerializeField]
-    private float hurtDamage = 3f;
-
 	// Start is called before the first frame update
 	void Start()
 	{
-		playerMovement = GameObject.Find("NewPlayer").GetComponent<PlayerMovement>();
-		health = maxHealth;
-		dead = false;
-		suckingEnemy = gameObject.GetComponent<SuckingEnemy>();
+		Restart();
 	}
 
 	public void Restart() {
-		Start();
+		playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+		health = maxHealth;
+		dead = false;
+		suckingEnemy = gameObject.GetComponent<SuckingEnemy>();
 	}
 
 	// Update is called once per frame
@@ -84,7 +81,7 @@ public class HealthManager : MonoBehaviour
 		}
 		return ammount;
 	}
-    public void GetHit()
+    public void GetHit(float hurtDamage)
     {
         health -= hurtDamage;
     }

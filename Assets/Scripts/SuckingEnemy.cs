@@ -31,13 +31,27 @@ public class SuckingEnemy : MonoBehaviour
     //Goes on player
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (clickAttackMovementScript.attacking && collider.gameObject.tag.Equals("Enemy") && collider.gameObject.GetComponent<EnemyStateController>().myState != EnemyStateController.EnemyState.dead)
+        Debug.Log("Triggerd: " + collider.gameObject.tag);
+        if (clickAttackMovementScript.attacking && 
+            collider.gameObject.tag.Equals("Enemy") && 
+            collider.gameObject.GetComponent<EnemyStateController>().myState != EnemyStateController.EnemyState.dead)
         {
             //gameObject.GetComponent<ClickAttackMovement>().StopAttack();
             clickAttackMovementScript.attacking = false;
             clickAttackMovementScript.attackTimer = 0;
             clickAttackMovementScript.StartCoroutine("Cooldown");
             healthManager.StartSucking(collider.gameObject.GetComponent<EnemyHealth>());
+        } 
+        else if (collider.gameObject.tag.Equals("Weapon")) 
+        {
+            Debug.Log("Weapon");
+            GameObject parent = collider.gameObject.transform.parent.gameObject;
+            if (parent.GetComponent<EnemyStateController>().myState == 
+                EnemyStateController.EnemyState.attacking)
+            {
+                float damage = parent.GetComponent<EnemyHealth>().DoDamage();
+                healthManager.GetHit(damage);
+            }
         }
     }
 

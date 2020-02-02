@@ -41,7 +41,6 @@ public class SurvivalTimer : MonoBehaviour
 
         if (runTimer)
         {
-            Debug.Log(timer);
             timer += Time.deltaTime;
         }
 
