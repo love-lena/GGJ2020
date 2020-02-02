@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    static Dictionary<string, Vector2> lookup = new Dictionary<string, Vector2>() {
+    static Dictionary<string, Vector3> lookup = new Dictionary<string, Vector3>() {
         //x: suckRate
         //y: totalSuck
-        {"default", new Vector2(3f, 15f)},
-        {"slow", new Vector2(1.1f, 20f)}
+        //z: suckDamage
+        {"default", new Vector3(3f, 15f, 1f)},
+        {"slow", new Vector3(1.1f, 20f, 15f)}
     };
 
     public string enemyType = "default";
     public float suckRate = 0f;
     public float suckLeft = 0f;
+    public float suckDamage = 0f;
     public bool gettingSucked = false;
 
     private EnemyStateController state;
@@ -22,9 +24,10 @@ public class EnemyHealth : MonoBehaviour
     void Start() 
     {
         gettingSucked = false;
-        Vector2 suckInfo = lookup.ContainsKey(enemyType) ? lookup[enemyType] : lookup["default"];
+        Vector3 suckInfo = lookup.ContainsKey(enemyType) ? lookup[enemyType] : lookup["default"];
         suckRate = suckInfo.x;
         suckLeft = suckInfo.y;
+        suckDamage = suckInfo.z;
         state = gameObject.GetComponent<EnemyStateController>();
     }
 
@@ -52,5 +55,9 @@ public class EnemyHealth : MonoBehaviour
 
     public bool Suckable() {
         return gettingSucked;
+    }
+
+    public float DoDamage() {
+        return suckDamage;
     }
 }

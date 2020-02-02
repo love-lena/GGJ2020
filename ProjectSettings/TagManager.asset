@@ -4,11 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - ScaryFace
+  - Wall
   - Enemy
   - HealthBar
   - GameManager
-  - ScaryFace
-  - Wall
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -45,7 +46,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: HealthBar
-    uniqueID: 796628095
     locked: 0

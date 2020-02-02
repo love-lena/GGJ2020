@@ -89,7 +89,7 @@ public class HealthManager : MonoBehaviour
 		}
 		return ammount;
 	}
-    public void GetHit()
+    public void GetHit(float hurtDamage)
     {
         health -= hurtDamage;
     }

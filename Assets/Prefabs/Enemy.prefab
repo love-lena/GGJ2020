@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1554945753}
   m_Layer: 0
   m_Name: Weapon
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -427,6 +427,7 @@ MonoBehaviour:
   enemyType: default
   suckRate: 0
   suckLeft: 0
+  suckDamage: 0
   gettingSucked: 0
 --- !u!114 &7355573035812331085
 MonoBehaviour:
