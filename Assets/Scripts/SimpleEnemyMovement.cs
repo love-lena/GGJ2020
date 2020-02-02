@@ -39,6 +39,12 @@ public class SimpleEnemyMovement : MonoBehaviour, EnemyMovementInterface
         return speed * stationaryMult;
     }
 
+    public void setSpeedMultiplier(float mult)
+    {
+        stationaryMult = mult;
+
+    }
+
     public void setScared(bool scared)
     {
         scaredMult = scared ? -1 : 1;

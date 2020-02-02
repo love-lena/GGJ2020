@@ -11,12 +11,26 @@ public class EnemyStateController : MonoBehaviour
     public bool stationary = false;
     private bool faceSeen;
 
+    private GameObject player;
+
     private float currSpeed = 0;
-    private Vector2 currDir = Vector2.zero;
+    public Vector2 currDir = Vector2.zero;
 
     [SerializeField]
     private float timeSpentAfraid = 2f;
     private float fearTimer;
+
+    private float weaponRange;
+    [SerializeField]
+    private float attackMovSpeedMultiplier = 0.5f;
+
+    [SerializeField]
+    private float attackCooldownTime = 1f;
+    private float attackCooldownTimer = 0f;
+
+    private float attackTime = 0.5f;
+    private EnemyWeapon weapon;
+
 
     //putting this here, we could totally  refactor it to
     //be in a static class
@@ -29,6 +43,10 @@ public class EnemyStateController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        weapon = transform.GetComponentInChildren<EnemyWeapon>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        weaponRange = weapon.weaponRange;
+        attackTime = weapon.activeTime;
         myState = EnemyState.chasing;
         enemyMovementController = GetComponent<EnemyMovementInterface>();
         if(enemyMovementController == null)
@@ -43,7 +61,6 @@ public class EnemyStateController : MonoBehaviour
     {
         if (other.gameObject.tag == "ScaryFace")
         {
-            print("scary face collision!");
             faceSeen = true;
         }
     }
@@ -53,10 +70,18 @@ public class EnemyStateController : MonoBehaviour
     {
         //sets stationary and scared on the movement controller,
         //and determines if a state change is necessary
+        updateTimers();
         stateMachine();
         currSpeed = enemyMovementController.getSpeed();
         currDir = enemyMovementController.getDir();
         enemyMover.SetMovement(currDir, currSpeed);
+    }
+    private void updateTimers()
+    {
+        if (attackCooldownTimer > 0)
+            attackCooldownTimer -= Time.deltaTime;
+        if (fearTimer> 0)
+            fearTimer -= Time.deltaTime;
     }
     private void stateMachine()
     {
@@ -74,11 +99,14 @@ public class EnemyStateController : MonoBehaviour
                     //important to remember to disable these transition variables
                     faceSeen = false;
                 }
+                if (Vector2.Distance(player.transform.position, transform.position) < weaponRange) 
+                {
+                    myState = EnemyState.attacking;
+                }
                 break;
             case EnemyState.afraid:
                 stationary = false;
                 scared = true;
-                fearTimer -= Time.deltaTime;
                 if(fearTimer <= 0)
                 {
                     myState = EnemyState.chasing;
@@ -93,6 +121,16 @@ public class EnemyStateController : MonoBehaviour
             case EnemyState.attacking:
                 stationary = true;
                 scared = false;
+                if(attackCooldownTimer <= 0)
+                {
+                    attackCooldownTimer = attackCooldownTime;
+                    weapon.attack();
+                }
+                if (Vector2.Distance(player.transform.position, transform.position) > weaponRange)
+                {
+                    myState = EnemyState.chasing;
+                }
+                    
                 //check distance to player, exit if further than attack range
                 break;
             case EnemyState.gettingSucked:
