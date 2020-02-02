@@ -10,6 +10,7 @@ public class ClickAttackMovement : MonoBehaviour
     private float speed;
     private string gameState;
     private GameObject gameManager;
+    private float movementDistance = 15f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,13 +34,13 @@ public class ClickAttackMovement : MonoBehaviour
 
     IEnumerator Attack()
     {
+        GetComponent<PlayerAnimation>().StartAttack();
         canAttack = false;
-
         //player.GetComponent<PlayerController>().SetState("attacking");
         Vector3 currentPos = (Vector2)playerTrans.position;
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 movementVec = (mousePos - currentPos);
+        Vector3 movementVec = (mousePos - currentPos).normalized *  movementDistance;
         movementVec.z = 0;
 
         for (float ft = 0.0F; ft <= 1.0F; ft += 0.1f)
@@ -53,7 +54,9 @@ public class ClickAttackMovement : MonoBehaviour
 
     IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
+        GetComponent<PlayerAnimation>().EndAttack();
+        yield return new WaitForSeconds(.5f);
         canAttack = true;
     }
 }
