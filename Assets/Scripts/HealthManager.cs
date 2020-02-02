@@ -10,6 +10,9 @@ public class HealthManager : MonoBehaviour
 
 	public bool dead = false;
 
+    [SerializeField]
+    private float hurtDamage = 3f;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -36,4 +39,11 @@ public class HealthManager : MonoBehaviour
 	public float GetMaxHealth() {
 		return maxHealth;
 	}
+
+    public void GetHit()
+    {
+        health -= hurtDamage;
+    }
+
+
 }

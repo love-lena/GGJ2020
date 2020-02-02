@@ -15,10 +15,6 @@ public class EnemyStateController : MonoBehaviour
     private Vector2 currDir = Vector2.zero;
 
     [SerializeField]
-    //determines how far away the enemy gets scared from
-    private float eyesight;
-
-    [SerializeField]
     private float timeSpentAfraid = 2f;
     private float fearTimer;
 
@@ -45,14 +41,10 @@ public class EnemyStateController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        print("enemy collision occurred");
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "ScaryFace")
         {
-            print("enemy collision with player");
-            if(Vector2.Distance(transform.position, other.transform.position) < eyesight)
-            {
-                faceSeen = true;
-            }
+            print("scary face collision!");
+            faceSeen = true;
         }
     }
 
@@ -63,7 +55,6 @@ public class EnemyStateController : MonoBehaviour
         //and determines if a state change is necessary
         stateMachine();
         currSpeed = enemyMovementController.getSpeed();
-        Debug.Log("currSpeed" + currSpeed);
         currDir = enemyMovementController.getDir();
         enemyMover.SetMovement(currDir, currSpeed);
     }
