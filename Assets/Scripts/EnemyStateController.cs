@@ -16,7 +16,7 @@ public class EnemyStateController : MonoBehaviour
 
     [SerializeField]
     //determines how far away the enemy gets scared from
-    private float eyesight;
+    private float eyesight = 3f;
 
     [SerializeField]
     private float timeSpentAfraid = 2f;

@@ -9,22 +9,22 @@ public class VectorEnemyMovement : MonoBehaviour, EnemyMovementInterface
 
     private CircleHits circleHits;
     [SerializeField]
-    private float enemyAvoidanceWeight;
+    private float enemyAvoidanceWeight = 3f;
     [SerializeField]
-    private float wallAvoidanceWeight;
+    private float wallAvoidanceWeight = 3f;
     [SerializeField]
-    private float minSpacingAvoidanceWeight;
+    private float minSpacingAvoidanceWeight = 0.1f;
     [SerializeField]
-    private float fearWeight;
+    private float fearWeight = 6f;
     [SerializeField]
-    private float chaseWeight;
+    private float chaseWeight = 1f;
 
     [SerializeField]
-    private float fearSpeed;
+    private float fearSpeed = 3f;
 
     [SerializeField]
-    private float chaseSpeed;
-    private bool amScared;
+    private float chaseSpeed = 2f;
+    private bool amScared = false;
 
     private GameObject player;
     private bool stationary;
