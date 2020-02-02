@@ -24,7 +24,8 @@ public class CameraEffects : MonoBehaviour
     }
     void Update()
     {
-        effectVal = (-maxEffect / maxHealth) + maxEffect;
+        effectVal = (-maxEffect / maxHealth)*health.health + maxEffect;
+        print(string.Format("maxH: {0} maxEff: {1} effectVal: {2}", maxHealth, maxEffect, effectVal));
         _bloodLossMat.SetFloat("_LossAmnt", effectVal);
 
     }
