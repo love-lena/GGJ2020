@@ -29,9 +29,9 @@ public class SuckingEnemy : MonoBehaviour
     }
 
     //Goes on player
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collider)
     {
-        Debug.Log("Triggerd: " + collider.gameObject.tag);
+        // Debug.Log("Triggerd: " + collider.gameObject.tag);
         if (clickAttackMovementScript.attacking && 
             collider.gameObject.tag.Equals("Enemy") && 
             collider.gameObject.GetComponent<EnemyStateController>().myState != EnemyStateController.EnemyState.dead)
@@ -44,7 +44,7 @@ public class SuckingEnemy : MonoBehaviour
         } 
         else if (collider.gameObject.tag.Equals("Weapon")) 
         {
-            Debug.Log("Weapon");
+            // Debug.Log("Weapon");
             GameObject parent = collider.gameObject.transform.parent.gameObject;
             if (parent.GetComponent<EnemyStateController>().myState == 
                 EnemyStateController.EnemyState.attacking)
@@ -55,7 +55,7 @@ public class SuckingEnemy : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collider)
+    void OnCollisionExit2D(Collision2D collider)
     {
         if (isSucking && collider.gameObject.tag.Equals("Enemy"))
         {

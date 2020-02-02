@@ -64,7 +64,7 @@ public class HealthManager : MonoBehaviour
 	}
 
 	public void StartSucking(EnemyHealth enemy) {
-		Debug.Log("Start the succ");
+		// Debug.Log("Start the succ");
 		playerMovement.takingInput = false;
 		enemy.StartSucking();
 		//suckingEnemy.StartSucking();

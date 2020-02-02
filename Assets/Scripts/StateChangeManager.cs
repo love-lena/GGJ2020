@@ -74,7 +74,7 @@ public class StateChangeManager : MonoBehaviour
 
     private void StartGame()
     {
-        GetComponent<EnemySpawner>().Spawn();
+        // GetComponent<EnemySpawner>().Spawn();
         gameState = "playing";
         healthManager.health = healthManager.GetMaxHealth();
     }

@@ -60,7 +60,7 @@ public class EnemyStateController : MonoBehaviour
     }
 
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.tag == "ScaryFace")
         {
@@ -88,7 +88,7 @@ public class EnemyStateController : MonoBehaviour
     }
     private void stateMachine()
     {
-        Debug.Log("Sucking: " + healthManager.IsSucking());
+        // Debug.Log("Sucking: " + healthManager.IsSucking());
         switch (myState)
         {
             //IMPORTANT:
