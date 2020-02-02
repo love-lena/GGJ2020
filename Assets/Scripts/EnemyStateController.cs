@@ -34,7 +34,11 @@ public class EnemyStateController : MonoBehaviour
 
     private float attackTime = 0.5f;
     private EnemyWeapon weapon;
+<<<<<<< HEAD
     private Animator enemyAnimator;
+=======
+    private bool bloodSpawned = false;
+>>>>>>> fixed particle emission
 
     //putting this here, we could totally  refactor it to
     //be in a static class
@@ -159,8 +163,12 @@ public class EnemyStateController : MonoBehaviour
             case EnemyState.gettingSucked:
                 stationary = true;
                 scared = false;
-                GameObject particles = GameObject.Instantiate(suckedParticles, transform);
-                particles.transform.localPosition = new Vector3(0,0,-1);
+                if (!bloodSpawned)
+                {
+                    bloodSpawned = true;
+                    GameObject particles = GameObject.Instantiate(suckedParticles, transform);
+                    particles.transform.localPosition = new Vector3(0, 0, -1);
+                }
 
                 //whatever state caused this transition (afraid, chasing, resting or non aggro)
                 //will need to set a succ timer
@@ -192,6 +200,10 @@ public class EnemyStateController : MonoBehaviour
                 break;
             default:
                 break;
+        }
+        if(!(myState == EnemyState.gettingSucked))
+        {
+            bloodSpawned = false;
         }
         enemyMovementController.setStationary(stationary);
         enemyMovementController.setScared(scared);
