@@ -84,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 0.04, y: 0.04}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &219800968
@@ -133,10 +133,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8318236968270894984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e48cc8f7cb33048e980457e7132da3be, type: 3}
+  m_Script: {fileID: 11500000, guid: d56bf3c6f4a0e400d983d47222a859ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  enemyType: default
+  suckRate: 0
+  suckLeft: 0
+  gettingSucked: 0
 --- !u!114 &2775340326094904915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,11 +149,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8318236968270894984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f15d972ce6f8495fa02b497077ae355, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c7f0cac980e74871b6b7bccd3933d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scared: 0
-  eyesight: 0
+  normalizeDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &5912321205565833111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,10 +162,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8318236968270894984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 141d5057af20a4155ac851cf2031e48e, type: 3}
+  m_Script: {fileID: 11500000, guid: 943c47fe058f1439c89e3d50bb23ae8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalizeDirection: {x: 0, y: 0, z: 0}
+  speed: 0
 --- !u!114 &7890443941370505534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +175,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8318236968270894984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5b503e2d976483585f6b9ebb146b91, type: 3}
+  m_Script: {fileID: 11500000, guid: f6d4f455bddba4d14b213474c0faae86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scared: 0
+  eyesight: 0

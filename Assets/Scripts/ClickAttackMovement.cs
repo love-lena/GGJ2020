@@ -8,7 +8,8 @@ public class ClickAttackMovement : MonoBehaviour
     GameObject player;
     Transform playerTrans;
     private float speed;
-
+    private string gameState;
+    private GameObject gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,16 +17,17 @@ public class ClickAttackMovement : MonoBehaviour
         player = this.gameObject;
         playerTrans = player.GetComponent<Transform>();
         speed = 50.0F;
-
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && canAttack)
+        gameState = gameManager.GetComponent<StateChangeManager>().GetState();
+        if (Input.GetMouseButtonDown(0) && canAttack && (gameState == "playing"))
         {
-            Debug.Log("Attack!");
             StartCoroutine("Attack");
+            StartCoroutine("Cooldown");
         }
     }
 
@@ -46,8 +48,12 @@ public class ClickAttackMovement : MonoBehaviour
             yield return new WaitForSeconds(.01F);
         }
         //playerTrans.position += movementVec.normalized * Time.deltaTime * speed;
-
-        canAttack = true;
         yield return null;
+    }
+
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
     }
 }
