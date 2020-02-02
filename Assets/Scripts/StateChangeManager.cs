@@ -12,12 +12,14 @@ public class StateChangeManager : MonoBehaviour
     [SerializeField]
     private GameObject endScreen;
     private GameObject enemies;
+    private GameObject player;
     public TextMeshProUGUI scoreText;
     // Start is called before the first frame update
     void Start()
     {
         healthManager = this.gameObject.GetComponent<HealthManager>();
         gameState = "starting";
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -56,6 +58,8 @@ public class StateChangeManager : MonoBehaviour
         {
             if(Input.GetButtonDown("Restart"))
             {
+                healthManager.Restart();
+                player.transform.position = new Vector3(3,0,0);
                 GetComponent<EnemySpawner>().CleanUp();
                 endScreen.SetActive(false);
                 StartGame();

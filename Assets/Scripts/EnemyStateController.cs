@@ -12,6 +12,7 @@ public class EnemyStateController : MonoBehaviour
     private bool faceSeen;
 
     private GameObject player;
+    private HealthManager healthManager;
 
     private float currSpeed = 0;
     public Vector2 currDir = Vector2.zero;
@@ -46,6 +47,7 @@ public class EnemyStateController : MonoBehaviour
     {
         weapon = transform.GetComponentInChildren<EnemyWeapon>();
         player = GameObject.FindGameObjectWithTag("Player");
+        healthManager = GameObject.Find("GameManager").GetComponent<HealthManager>();
         weaponRange = weapon.weaponRange;
         attackTime = weapon.activeTime;
         myState = EnemyState.chasing;
@@ -86,6 +88,7 @@ public class EnemyStateController : MonoBehaviour
     }
     private void stateMachine()
     {
+        Debug.Log("Sucking: " + healthManager.IsSucking());
         switch (myState)
         {
             //IMPORTANT:
@@ -93,7 +96,7 @@ public class EnemyStateController : MonoBehaviour
             case EnemyState.chasing:
                 stationary = false;
                 scared = false;
-                if (faceSeen)
+                if (faceSeen && !healthManager.IsSucking())
                 {
                     fearTimer = timeSpentAfraid;
                     myState = EnemyState.afraid;
@@ -108,7 +111,7 @@ public class EnemyStateController : MonoBehaviour
             case EnemyState.afraid:
                 stationary = false;
                 scared = true;
-                if(fearTimer <= 0)
+                if(fearTimer <= 0 || healthManager.IsSucking())
                 {
                     myState = EnemyState.chasing;
                 }

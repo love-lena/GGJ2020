@@ -187,8 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329a049af8bbffa4b89314e14e4e0b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 6
   takingInput: 1
+  controllerControl: 0
 --- !u!114 &838730892215490702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae91b61d4fb4f5d4786448c8594ec178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerInput: 0
+  attacking: 0
+  attackTimer: 0
+  readyToAttack: 1
+  attackRechargeTimer: 0
 --- !u!114 &1438359447083942324
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,23 +16,28 @@ public class HealthManager : MonoBehaviour
 
     [SerializeField]
     private float hurtDamage = 3f;
+	public bool debugging = false;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		//Restart();
+	}
+
+
+	public void Restart() {
 		playerMovement = GameObject.Find("NewPlayer").GetComponent<PlayerMovement>();
 		health = maxHealth;
 		dead = false;
 		suckingEnemy = gameObject.GetComponent<SuckingEnemy>();
 	}
 
-	public void Restart() {
-		Start();
-	}
-
 	// Update is called once per frame
 	void Update()
 	{
+		if(debugging) {
+			health = 10f;
+		}
 		if (! dead) {
 			float delta = Time.deltaTime;
 			health -= (lose * delta) - GetSuckedAmmount(delta);
@@ -88,6 +93,10 @@ public class HealthManager : MonoBehaviour
     {
         health -= hurtDamage;
     }
+
+	public bool IsSucking() {
+		return sucker != null;
+	}
 
 
 }

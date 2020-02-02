@@ -8,6 +8,7 @@ TagManager:
   - HealthBar
   - GameManager
   - ScaryFace
+  - Wall
   layers:
   - Default
   - TransparentFX

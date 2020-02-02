@@ -17,6 +17,11 @@ public class ClickAttackMovement : MonoBehaviour
     private float timeToAttack = 0.1f;
     public float attackTimer = 0f;
     private float attackSpeed = 50f;
+
+    public bool readyToAttack = true;
+    
+    private float timeToReadyAttack = 0.75f;
+    public float attackRechargeTimer = 0f;
     private Quaternion lockRotation;
     // Start is called before the first frame update
     void Start()
@@ -36,7 +41,8 @@ public class ClickAttackMovement : MonoBehaviour
             if(attackTimer >= timeToAttack) {
                 attacking = false;
                 attackTimer = 0;
-                StartCoroutine("Cooldown");
+                readyToAttack = false;
+                //StartCoroutine("Cooldown");
             } else {
                 attackTimer += Time.deltaTime;
                 transform.Translate(Vector3.up * Time.deltaTime * attackSpeed);
@@ -46,7 +52,7 @@ public class ClickAttackMovement : MonoBehaviour
 
         gameState = gameManager.GetComponent<StateChangeManager>().GetState();
         
-        if (Input.GetButtonDown("Attack") && canAttack && (gameState == "playing"))
+        if ((Input.GetButtonDown("Attack") || Input.GetButtonDown("Attack2")) && readyToAttack && (gameState == "playing"))
         {
             canAttack = false;
             attacking = true;
@@ -54,17 +60,27 @@ public class ClickAttackMovement : MonoBehaviour
             //attackCorInstance = StartCoroutine("Attack");
             //StartCoroutine("Cooldown");
             //GameObject.FindWithTag("Player").GetComponent<SuckingEnemy>().StartSucking();
-        } else if (Input.GetButtonUp("Attack") && ! canAttack && (gameState == "playing")) {
+        } else if (Input.GetButtonUp("Attack") || Input.GetButtonUp("Attack2")) {
             attacking = false;
             GetComponent<SuckingEnemy>().StopSucking();
             //StopCoroutine("Attack");
         }
 
+        if(readyToAttack == false) {
+            if(attackRechargeTimer >= timeToReadyAttack) {
+                attackRechargeTimer = 0f;
+                readyToAttack = true;
+            } else {
+                attackRechargeTimer += Time.deltaTime;
+            }
+        }
+
         
     }
 
-    public void StopAttack() { Debug.Log("STOP!");StopCoroutine(attackCorInstance); }
+    public void StopAttack() { StopCoroutine(attackCorInstance); }
 
+    //Not used
     IEnumerator Attack()
     {
         if(controllerInput) {
@@ -107,9 +123,10 @@ public class ClickAttackMovement : MonoBehaviour
         }
     }
 
+    //Not used
     IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f);
         canAttack = true;
     }
 }
