@@ -49,5 +49,9 @@ public class EnemySpawner : MonoBehaviour
 
     public void CleanUp()
     {
+        Destroy(enemiesSpawned);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in enemies)
+            GameObject.Destroy(enemy);
     }
 }

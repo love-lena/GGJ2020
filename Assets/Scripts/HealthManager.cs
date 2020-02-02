@@ -17,10 +17,14 @@ public class HealthManager : MonoBehaviour
     [SerializeField]
     private float hurtDamage = 3f;
 	public bool debugging = false;
+	public GameObject enemyPrefab;
+	private AudioSource myAudio;
+
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		myAudio = GetComponent<AudioSource>();
 		//Restart();
 	}
 
@@ -64,17 +68,17 @@ public class HealthManager : MonoBehaviour
 	}
 
 	public void StartSucking(EnemyHealth enemy) {
-		// Debug.Log("Start the succ");
+    myAudio.Play();
 		playerMovement.takingInput = false;
 		enemy.StartSucking();
-		//suckingEnemy.StartSucking();
 		sucker = enemy;
 	}
 
 	public void StopSucking() {
 		if(sucker != null) {
+			myAudio.Stop();
 			sucker.StopSucking();
-			//suckingEnemy.StopSucking();
+			Instantiate(enemyPrefab, Random.insideUnitCircle * 30, Quaternion.identity);
 			Destroy(sucker.gameObject);
 			playerMovement.takingInput = true;
 			sucker = null;

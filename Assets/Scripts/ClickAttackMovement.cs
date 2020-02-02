@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ClickAttackMovement : MonoBehaviour
 {
+    public AudioSource dash;
     bool canAttack; 
     GameObject player;
     Transform playerTrans;
@@ -23,6 +24,7 @@ public class ClickAttackMovement : MonoBehaviour
     private float timeToReadyAttack = 0.75f;
     public float attackRechargeTimer = 0f;
     private Quaternion lockRotation;
+    private Animator playerAnimation;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,7 @@ public class ClickAttackMovement : MonoBehaviour
         playerTrans = player.GetComponent<Transform>();
         speed = 50.0F;
         gameManager = GameObject.Find("GameManager");
+        playerAnimation = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -54,8 +57,11 @@ public class ClickAttackMovement : MonoBehaviour
         
         if ((Input.GetButtonDown("Attack") || Input.GetButtonDown("Attack2")) && readyToAttack && (gameState == "playing"))
         {
+            dash.Play();
             canAttack = false;
             attacking = true;
+            playerAnimation.SetBool("Attacking", true);
+            Invoke("EndAttack", .2f);
             lockRotation = transform.rotation;
             //attackCorInstance = StartCoroutine("Attack");
             //StartCoroutine("Cooldown");
@@ -77,9 +83,11 @@ public class ClickAttackMovement : MonoBehaviour
 
         
     }
-
     public void StopAttack() { StopCoroutine(attackCorInstance); }
-
+    private void EndAttack()
+    {
+        playerAnimation.SetBool("Attacking", false);
+    }
     //Not used
     IEnumerator Attack()
     {

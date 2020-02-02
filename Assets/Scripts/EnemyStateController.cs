@@ -31,7 +31,7 @@ public class EnemyStateController : MonoBehaviour
 
     private float attackTime = 0.5f;
     private EnemyWeapon weapon;
-
+    private Animator enemyAnimator;
 
     //putting this here, we could totally  refactor it to
     //be in a static class
@@ -57,6 +57,7 @@ public class EnemyStateController : MonoBehaviour
             // print("didn't find an enemy movement controller on gameobject " + gameObject.name);
         }
         enemyMover = GetComponent<EnemyMover>();
+        enemyAnimator = GetComponent<Animator>();
     }
 
 
@@ -113,8 +114,17 @@ public class EnemyStateController : MonoBehaviour
                 scared = true;
                 if(fearTimer <= 0 || healthManager.IsSucking())
                 {
-                    myState = EnemyState.chasing;
+                    if (!faceSeen)
+                    {
+                        myState = EnemyState.chasing;
+                    }
+                    else
+                    {
+                        faceSeen = false;
+                        fearTimer = timeSpentAfraid;
+                    }
                 }
+                
                 break;
             case EnemyState.resting:
                 stationary = true;
@@ -129,10 +139,16 @@ public class EnemyStateController : MonoBehaviour
                 {
                     attackCooldownTimer = attackCooldownTime;
                     weapon.attack();
+                    enemyAnimator.SetBool("Attacking", true);
+                    Invoke("StopAttacking", .3f);
                 }
                 if (Vector2.Distance(player.transform.position, transform.position) > weaponRange)
                 {
                     myState = EnemyState.chasing;
+                }
+                if (faceSeen)
+                {
+                    myState = EnemyState.afraid;
                 }
                     
                 //check distance to player, exit if further than attack range
@@ -179,5 +195,8 @@ public class EnemyStateController : MonoBehaviour
     {
         myState = newState;
     }
-
+    private void StopAttacking()
+    {
+        enemyAnimator.SetBool("Attacking", false);
+    }
 }

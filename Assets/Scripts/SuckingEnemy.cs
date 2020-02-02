@@ -8,6 +8,7 @@ public class SuckingEnemy : MonoBehaviour
     private ClickAttackMovement clickAttackMovementScript;
     public HealthManager healthManager;
     private bool isSucking;
+    private float knockBackAmount = 1500f;
 
     void Start()
     {
@@ -51,6 +52,7 @@ public class SuckingEnemy : MonoBehaviour
             {
                 float damage = parent.GetComponent<EnemyHealth>().DoDamage();
                 healthManager.GetHit(damage);
+                PlayerKnockback(collider.gameObject.transform);
             }
         }
     }
@@ -65,4 +67,28 @@ public class SuckingEnemy : MonoBehaviour
     }
 
     public bool GetIsSucking() { return isSucking; }
+
+    private void PlayerKnockback(Transform source) {
+        Debug.Log("Knockback");
+        if(isSucking) {
+            //Stop sucking
+            StopSucking();
+        } 
+        //Disable movement
+        StartCoroutine("DisableMovementKnockback");
+        //Push Player
+        Vector2 pushForce = transform.position - source.position;
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2();
+        gameObject.GetComponent<Rigidbody2D>().AddForce(pushForce.normalized * knockBackAmount);
+    }
+
+    private IEnumerator DisableMovementKnockback() {
+
+        gameObject.GetComponent<PlayerMovement>().takingInput = false;
+        gameObject.GetComponent<ClickAttackMovement>().readyToAttack = false;
+        yield return new WaitForSeconds(0.2f);
+        gameObject.GetComponent<PlayerMovement>().takingInput = true;
+        gameObject.GetComponent<ClickAttackMovement>().readyToAttack = true;
+        yield return null;
+    }
 }
