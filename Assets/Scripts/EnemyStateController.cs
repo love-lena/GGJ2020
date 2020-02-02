@@ -113,8 +113,16 @@ public class EnemyStateController : MonoBehaviour
                 scared = true;
                 if(fearTimer <= 0 || healthManager.IsSucking())
                 {
-                    myState = EnemyState.chasing;
+                    if (!faceSeen)
+                    {
+                        myState = EnemyState.chasing;
+                    }
+                    else
+                    {
+                        fearTimer = timeSpentAfraid;
+                    }
                 }
+                
                 break;
             case EnemyState.resting:
                 stationary = true;
@@ -133,6 +141,10 @@ public class EnemyStateController : MonoBehaviour
                 if (Vector2.Distance(player.transform.position, transform.position) > weaponRange)
                 {
                     myState = EnemyState.chasing;
+                }
+                if (faceSeen)
+                {
+                    myState = EnemyState.afraid;
                 }
                     
                 //check distance to player, exit if further than attack range
