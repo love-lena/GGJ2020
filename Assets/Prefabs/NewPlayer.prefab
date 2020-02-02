@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   takingInput: 1
-  controllerControl: 0
+  controllerControl: 1
 --- !u!114 &838730892215490702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae91b61d4fb4f5d4786448c8594ec178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 0
+  controllerInput: 1
   attacking: 0
   attackTimer: 0
   readyToAttack: 1
@@ -245,7 +245,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -270,7 +270,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10, y: 10}
+    oldSize: {x: 3.3333333, y: 3.3333333}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -278,9 +278,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5}
-      - {x: -0.4330127, y: -0.25000003}
-      - {x: 0.43301272, y: -0.24999996}
+    - - {x: 0.5957552, y: 0.54402745}
+      - {x: -0.56438965, y: 0.536162}
+      - {x: -0.5726429, y: -0.3506343}
+      - {x: 0.5819514, y: -0.30660674}
 --- !u!114 &7863175239969923647
 MonoBehaviour:
   m_ObjectHideFlags: 0

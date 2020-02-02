@@ -67,7 +67,8 @@ public class VectorEnemyMovement : MonoBehaviour, EnemyMovementInterface
         for(int i = 0; i < hitNum; i ++)
         {
             
-            if (hits[i].tag == "Enemy" && !(hits[i].gameObject.name == gameObject.name)) 
+            if (hits[i].tag == "Enemy" && !(hits[i].gameObject.name == gameObject.name) && 
+                !hits[i].gameObject.GetComponent<EnemyHealth>().gettingSucked) 
             {
                 res += getAvoidanceVector(hits[i].transform.position, hitNum, enemyAvoidanceWeight);
             }else if(hits[i].tag == "Wall"){

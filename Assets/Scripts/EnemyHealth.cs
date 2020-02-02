@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
         //x: suckRate
         //y: totalSuck
         //z: suckDamage
-        {"default", new Vector3(3f, 15f, 1f)},
+        {"default", new Vector3(5f, 10f, 2f)},
         {"slow", new Vector3(1.1f, 20f, 15f)}
     };
 

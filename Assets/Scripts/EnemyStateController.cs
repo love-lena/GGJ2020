@@ -119,6 +119,7 @@ public class EnemyStateController : MonoBehaviour
                     }
                     else
                     {
+                        faceSeen = false;
                         fearTimer = timeSpentAfraid;
                     }
                 }

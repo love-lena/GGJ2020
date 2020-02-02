@@ -128,6 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 837039326, guid: 94dfe5a457120c948a36f3f1aa4f70bf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1880447804, guid: 94dfe5a457120c948a36f3f1aa4f70bf, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
       value: 5
@@ -174,11 +178,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1880447804, guid: 94dfe5a457120c948a36f3f1aa4f70bf, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 3.3333333
       objectReference: {fileID: 0}
     - target: {fileID: 1880447804, guid: 94dfe5a457120c948a36f3f1aa4f70bf, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 3.3333333
       objectReference: {fileID: 0}
     - target: {fileID: 838730892215490689, guid: 94dfe5a457120c948a36f3f1aa4f70bf,
         type: 3}
@@ -1003,8 +1007,14 @@ PrefabInstance:
     - target: {fileID: 6219758841115668496, guid: cc7752de1fde646108f743725550d5e2,
         type: 3}
       propertyPath: debugging
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6219758841115668496, guid: cc7752de1fde646108f743725550d5e2,
+        type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 8318236968270894984, guid: 7885ac81c8c4f5b47a2beca0fd5b9d77,
+        type: 3}
     - target: {fileID: 8600872336211785602, guid: cc7752de1fde646108f743725550d5e2,
         type: 3}
       propertyPath: m_Name

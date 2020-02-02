@@ -49,7 +49,7 @@ public class StateChangeManager : MonoBehaviour
             if(healthManager.GetHealth() <= 0.0)
             {
                 gameState = "failed";
-                scoreText.SetText("Score : " + gameObject.GetComponent<SurvivalTimer>().GetTimer());
+                scoreText.SetText("Score : " + (int)(gameObject.GetComponent<SurvivalTimer>().GetTimer() * 100));
                 endScreen.SetActive(true);
             }
         }
