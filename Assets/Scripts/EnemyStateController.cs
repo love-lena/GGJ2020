@@ -28,10 +28,12 @@ public class EnemyStateController : MonoBehaviour
     [SerializeField]
     private float attackCooldownTime = 1f;
     private float attackCooldownTimer = 0f;
+    [SerializeField]
+    private GameObject suckedParticles;
+
 
     private float attackTime = 0.5f;
     private EnemyWeapon weapon;
-
 
     //putting this here, we could totally  refactor it to
     //be in a static class
@@ -152,6 +154,9 @@ public class EnemyStateController : MonoBehaviour
             case EnemyState.gettingSucked:
                 stationary = true;
                 scared = false;
+                GameObject particles = GameObject.Instantiate(suckedParticles, transform);
+                particles.transform.localPosition = new Vector3(0,0,-1);
+
                 //whatever state caused this transition (afraid, chasing, resting or non aggro)
                 //will need to set a succ timer
 
@@ -185,6 +190,14 @@ public class EnemyStateController : MonoBehaviour
         }
         enemyMovementController.setStationary(stationary);
         enemyMovementController.setScared(scared);
+    }
+
+    private void InstAllInArray(GameObject[] inst)
+    {
+        foreach(GameObject obj in inst)
+        {
+            GameObject.Instantiate(obj, gameObject.transform);
+        }
     }
 
     public void SetState(EnemyState newState) 

@@ -411,6 +411,8 @@ MonoBehaviour:
   timeSpentAfraid: 2
   attackMovSpeedMultiplier: 0.5
   attackCooldownTime: 1
+  suckedParticles: {fileID: 3900399470362038195, guid: ba9393d11858e4244b6fc898ab035a54,
+    type: 3}
   myState: 0
 --- !u!114 &5073987855317426340
 MonoBehaviour:
