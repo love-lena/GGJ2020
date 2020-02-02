@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047f2c328116f4e5d988e3f58c0cbf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAvoidanceWeight: 3
+  enemyAvoidanceWeight: 5
   wallAvoidanceWeight: 3
   minSpacingAvoidanceWeight: 0.1
   fearWeight: 6
@@ -188,7 +188,7 @@ MonoBehaviour:
   scared: 0
   stationary: 0
   eyesight: 3
-  timeSpentAfraid: 2
+  timeSpentAfraid: 1
   myState: 0
 --- !u!114 &8368121762797522247
 MonoBehaviour:
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc85f77e329eb44c4a43c42d8fea2cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkRadius: 0
+  checkRadius: 3
   circleHits:
   - {fileID: 0}
   - {fileID: 0}

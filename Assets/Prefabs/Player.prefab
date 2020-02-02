@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   takingInput: 1
+  controllerControl: 1
 --- !u!61 &838730892215490701
 BoxCollider2D:
   m_ObjectHideFlags: 0

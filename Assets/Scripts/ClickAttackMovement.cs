@@ -10,6 +10,7 @@ public class ClickAttackMovement : MonoBehaviour
     private float speed;
     private string gameState;
     private GameObject gameManager;
+    public bool controllerInput = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class ClickAttackMovement : MonoBehaviour
     void Update()
     {
         gameState = gameManager.GetComponent<StateChangeManager>().GetState();
-        if (Input.GetMouseButtonDown(0) && canAttack && (gameState == "playing"))
+        if (Input.GetButtonDown("Attack") && canAttack && (gameState == "playing"))
         {
             StartCoroutine("Attack");
             StartCoroutine("Cooldown");
@@ -33,22 +34,44 @@ public class ClickAttackMovement : MonoBehaviour
 
     IEnumerator Attack()
     {
-        canAttack = false;
+        if(controllerInput) {
+            canAttack = false;
 
-        //player.GetComponent<PlayerController>().SetState("attacking");
-        Vector3 currentPos = (Vector2)playerTrans.position;
+            Vector3 currentPos = (Vector2)playerTrans.position;
+            
+            Vector3 targetForward = player.transform.rotation * Vector3.up;
+            targetForward = targetForward.normalized * 3f;
+            
+            Vector3 targetPos = currentPos + targetForward;
+            Vector3 movementVec = (targetPos - currentPos);
+            movementVec.z = 0;
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 movementVec = (mousePos - currentPos);
-        movementVec.z = 0;
+            for (float ft = 0.0F; ft <= 1.0F; ft += 0.1f)
+            {
+                player.transform.position = currentPos + movementVec * ft;
+                yield return new WaitForSeconds(.01F);
+            }
+            //playerTrans.position += movementVec.normalized * Time.deltaTime * speed;
+            yield return null;
 
-        for (float ft = 0.0F; ft <= 1.0F; ft += 0.1f)
-        {
-            player.transform.position = currentPos + movementVec * ft;
-            yield return new WaitForSeconds(.01F);
+        } else {
+            canAttack = false;
+
+            //player.GetComponent<PlayerController>().SetState("attacking");
+            Vector3 currentPos = (Vector2)playerTrans.position;
+
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 movementVec = (mousePos - currentPos);
+            movementVec.z = 0;
+
+            for (float ft = 0.0F; ft <= 1.0F; ft += 0.1f)
+            {
+                player.transform.position = currentPos + movementVec * ft;
+                yield return new WaitForSeconds(.01F);
+            }
+            //playerTrans.position += movementVec.normalized * Time.deltaTime * speed;
+            yield return null;
         }
-        //playerTrans.position += movementVec.normalized * Time.deltaTime * speed;
-        yield return null;
     }
 
     IEnumerator Cooldown()
