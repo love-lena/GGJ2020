@@ -27,18 +27,21 @@ public class SuckingEnemy : MonoBehaviour
     //Goes on player
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (isSucking && collider.gameObject.tag.Equals("enemy"))
+        if (isSucking && collider.gameObject.tag.Equals("Enemy"))
         {
+            gameObject.GetComponent<ClickAttackMovement>().StopAttack();
             healthManager.StartSucking(collider.gameObject.GetComponent<EnemyHealth>());
         }
     }
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (isSucking && collider.gameObject.tag.Equals("enemy"))
+        if (isSucking && collider.gameObject.tag.Equals("Enemy"))
         {
             StopSucking();
             healthManager.StopSucking();
         }
     }
+
+    public bool GetIsSucking() { return isSucking; }
 }

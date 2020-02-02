@@ -28,10 +28,13 @@ public class ClickAttackMovement : MonoBehaviour
         {
             StartCoroutine("Attack");
             StartCoroutine("Cooldown");
+            GameObject.FindWithTag("Player").GetComponent<SuckingEnemy>().StartSucking();
         } else if (Input.GetMouseButtonUp(0) && ! canAttack && (gameState == "playing")) {
             StopCoroutine("Attack");
         }
     }
+
+    public void StopAttack() { StopCoroutine("Attack"); }
 
     IEnumerator Attack()
     {
