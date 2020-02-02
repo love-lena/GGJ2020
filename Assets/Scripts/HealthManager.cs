@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-	private float maxHealth = 20f;
+	private float maxHealth = 10f;
 	public float health = 20f;
 	private float lose = 1f;
 
 	public bool dead = false;
 	public bool sucking = false;
 	public EnemyHealth sucker = null;
-	private float suckRate = 0f;
+	public SuckingEnemy suckingEnemy = null;
+	private PlayerMovement playerMovement;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		playerMovement = GameObject.Find("NewPlayer").GetComponent<PlayerMovement>();
 		health = maxHealth;
 		dead = false;
+		suckingEnemy = gameObject.GetComponent<SuckingEnemy>();
 	}
 
 	public void Restart() {
@@ -35,6 +38,9 @@ public class HealthManager : MonoBehaviour
 				dead = true;
 			}
 		}
+		if(health > maxHealth) {
+			health = maxHealth;
+		}
 	}
 	
 	public float GetHealth() {
@@ -50,13 +56,21 @@ public class HealthManager : MonoBehaviour
 	}
 
 	public void StartSucking(EnemyHealth enemy) {
+		Debug.Log("Start the succ");
+		playerMovement.takingInput = false;
 		enemy.StartSucking();
+		//suckingEnemy.StartSucking();
 		sucker = enemy;
 	}
 
 	public void StopSucking() {
-		sucker.StopSucking();
-		sucker = null;
+		if(sucker != null) {
+			sucker.StopSucking();
+			//suckingEnemy.StopSucking();
+			Destroy(sucker.gameObject);
+			playerMovement.takingInput = true;
+			sucker = null;
+		}
 	}
 
 	private float GetSuckedAmmount(float delta) {

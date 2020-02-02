@@ -11,6 +11,13 @@ public class ClickAttackMovement : MonoBehaviour
     private string gameState;
     private GameObject gameManager;
     public bool controllerInput = false;
+    private Coroutine attackCorInstance;
+    public bool attacking = false;
+    
+    private float timeToAttack = 0.1f;
+    public float attackTimer = 0f;
+    private float attackSpeed = 50f;
+    private Quaternion lockRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +31,39 @@ public class ClickAttackMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(attacking) {
+            if(attackTimer >= timeToAttack) {
+                attacking = false;
+                attackTimer = 0;
+                StartCoroutine("Cooldown");
+            } else {
+                attackTimer += Time.deltaTime;
+                transform.Translate(Vector3.up * Time.deltaTime * attackSpeed);
+            }
+            transform.rotation = lockRotation;
+        }
+
         gameState = gameManager.GetComponent<StateChangeManager>().GetState();
+        
         if (Input.GetButtonDown("Attack") && canAttack && (gameState == "playing"))
         {
-            StartCoroutine("Attack");
-            StartCoroutine("Cooldown");
+            canAttack = false;
+            attacking = true;
+            lockRotation = transform.rotation;
+            //attackCorInstance = StartCoroutine("Attack");
+            //StartCoroutine("Cooldown");
+            //GameObject.FindWithTag("Player").GetComponent<SuckingEnemy>().StartSucking();
+        } else if (Input.GetButtonUp("Attack") && ! canAttack && (gameState == "playing")) {
+            attacking = false;
+            GetComponent<SuckingEnemy>().StopSucking();
+            //StopCoroutine("Attack");
         }
+
+        
     }
+
+    public void StopAttack() { Debug.Log("STOP!");StopCoroutine(attackCorInstance); }
 
     IEnumerator Attack()
     {
@@ -40,7 +73,7 @@ public class ClickAttackMovement : MonoBehaviour
             Vector3 currentPos = (Vector2)playerTrans.position;
             
             Vector3 targetForward = player.transform.rotation * Vector3.up;
-            targetForward = targetForward.normalized * 3f;
+            targetForward = targetForward.normalized * 8f;
             
             Vector3 targetPos = currentPos + targetForward;
             Vector3 movementVec = (targetPos - currentPos);

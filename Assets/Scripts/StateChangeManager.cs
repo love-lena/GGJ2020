@@ -12,6 +12,7 @@ public class StateChangeManager : MonoBehaviour
     [SerializeField]
     private GameObject endScreen;
     private GameObject enemies;
+    public TextMeshProUGUI scoreText;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class StateChangeManager : MonoBehaviour
     {
         if (gameState.Equals("starting"))
         {
-            if(Input.GetKeyDown("space"))
+            if(Input.GetButtonDown("Start"))
             {
                 healthManager.Restart();
                 gameState = "playing";
@@ -46,13 +47,14 @@ public class StateChangeManager : MonoBehaviour
             if(healthManager.GetHealth() <= 0.0)
             {
                 gameState = "failed";
+                scoreText.SetText("Score : " + gameObject.GetComponent<SurvivalTimer>().GetTimer());
                 endScreen.SetActive(true);
             }
         }
 
         if (gameState.Equals("failed"))
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetButtonDown("Restart"))
             {
                 GetComponent<EnemySpawner>().CleanUp();
                 endScreen.SetActive(false);

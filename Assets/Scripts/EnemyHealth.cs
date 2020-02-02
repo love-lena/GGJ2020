@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     static Dictionary<string, Vector2> lookup = new Dictionary<string, Vector2>() {
-        {"default", new Vector2(2f, 6f)},
+        //x: suckRate
+        //y: totalSuck
+        {"default", new Vector2(3f, 15f)},
         {"slow", new Vector2(1.1f, 20f)}
     };
 
@@ -14,6 +16,8 @@ public class EnemyHealth : MonoBehaviour
     public float suckLeft = 0f;
     public bool gettingSucked = false;
 
+    private EnemyStateController state;
+
     // Start is called before the first frame update
     void Start() 
     {
@@ -21,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
         Vector2 suckInfo = lookup.ContainsKey(enemyType) ? lookup[enemyType] : lookup["default"];
         suckRate = suckInfo.x;
         suckLeft = suckInfo.y;
+        state = gameObject.GetComponent<EnemyStateController>();
     }
 
     // Update is called once per frame
@@ -28,11 +33,14 @@ public class EnemyHealth : MonoBehaviour
 
     public void StartSucking() {
         gettingSucked = true;
+        state.SetState(EnemyStateController.EnemyState.gettingSucked);
+        Debug.Log("Starting the succ");
     }
 
     public void StopSucking() {
         suckLeft = 0f;
         gettingSucked = false;
+        state.SetState(EnemyStateController.EnemyState.dead);
     }
 
     public float Sucked(float delta) {

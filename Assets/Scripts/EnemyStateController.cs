@@ -15,29 +15,30 @@ public class EnemyStateController : MonoBehaviour
     private Vector2 currDir = Vector2.zero;
 
     [SerializeField]
-    //determines how far away the enemy gets scared from
-    private float eyesight;
-
-    [SerializeField]
     private float timeSpentAfraid = 2f;
     private float fearTimer;
+
+    //DELETE ME!
+    public GameObject gameManager;
 
     //putting this here, we could totally  refactor it to
     //be in a static class
     public enum EnemyState
     {
-        chasing, afraid, resting, attacking, gettingSucked, speaking, notAggressive, dead
+        chasing, afraid, resting, attacking, gettingSucked, 
+        speaking, notAggressive, dead
     }
 
     public EnemyState myState;
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager");
         myState = EnemyState.chasing;
         enemyMovementController = GetComponent<EnemyMovementInterface>();
         if(enemyMovementController == null)
         {
-            print("didn't find an enemy movement controller on gameobject " + gameObject.name);
+            // print("didn't find an enemy movement controller on gameobject " + gameObject.name);
         }
         enemyMover = GetComponent<EnemyMover>();
     }
@@ -45,14 +46,15 @@ public class EnemyStateController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        print("enemy collision occurred");
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "ScaryFace")
         {
-            print("enemy collision with player");
-            if(Vector2.Distance(transform.position, other.transform.position) < eyesight)
-            {
-                faceSeen = true;
-            }
+            // print("scary face collision!");
+            faceSeen = true;
+        }
+        if(other.gameObject.tag == "Player") {
+            Debug.Log("KILL!");
+            
+            gameManager.GetComponent<HealthManager>().health -= (1.5f * Time.deltaTime);
         }
     }
 
@@ -63,7 +65,6 @@ public class EnemyStateController : MonoBehaviour
         //and determines if a state change is necessary
         stateMachine();
         currSpeed = enemyMovementController.getSpeed();
-        Debug.Log("currSpeed" + currSpeed);
         currDir = enemyMovementController.getDir();
         enemyMover.SetMovement(currDir, currSpeed);
     }
@@ -140,6 +141,11 @@ public class EnemyStateController : MonoBehaviour
         }
         enemyMovementController.setStationary(stationary);
         enemyMovementController.setScared(scared);
+    }
+
+    public void SetState(EnemyState newState) 
+    {
+        myState = newState;
     }
 
 }

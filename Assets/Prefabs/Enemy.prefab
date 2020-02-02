@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 5796959827168743150}
   - component: {fileID: 219800968}
   - component: {fileID: 2065337221}
-  - component: {fileID: 8866846054563379486}
-  - component: {fileID: 5073987855317426340}
-  - component: {fileID: 4087859014676291102}
-  - component: {fileID: 7890443941370505534}
   - component: {fileID: 8368121762797522247}
+  - component: {fileID: 4068318086572566793}
+  - component: {fileID: 4179904744531805182}
+  - component: {fileID: 10512121638241684}
+  - component: {fileID: 5073987855317426340}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.26666668, y: 0.26666668}
+  m_Size: {x: 0.8, y: 0.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -125,7 +125,7 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8866846054563379486
+--- !u!114 &8368121762797522247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,30 +137,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047f2c328116f4e5d988e3f58c0cbf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAvoidanceWeight: 5
+  enemyAvoidanceWeight: 10
   wallAvoidanceWeight: 3
   minSpacingAvoidanceWeight: 0.1
   fearWeight: 6
   chaseWeight: 1
   fearSpeed: 3
-  chaseSpeed: 2
---- !u!114 &5073987855317426340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8318236968270894984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56bf3c6f4a0e400d983d47222a859ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: default
-  suckRate: 0
-  suckLeft: 0
-  gettingSucked: 0
---- !u!114 &4087859014676291102
+  chaseSpeed: 4
+--- !u!114 &4068318086572566793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalizeDirection: {x: 0, y: 0, z: 0}
---- !u!114 &7890443941370505534
+--- !u!114 &4179904744531805182
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,10 +171,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scared: 0
   stationary: 0
-  eyesight: 3
-  timeSpentAfraid: 1
+  timeSpentAfraid: 0.5
   myState: 0
---- !u!114 &8368121762797522247
+--- !u!114 &10512121638241684
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,3 +208,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   numHits: 0
+--- !u!114 &5073987855317426340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8318236968270894984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56bf3c6f4a0e400d983d47222a859ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: default
+  suckRate: 0
+  suckLeft: 0
+  gettingSucked: 0
