@@ -12,15 +12,19 @@ public class PlayerMovement : MonoBehaviour
     private float verticalInput;
     public float speed = 10;
     public bool takingInput = true;
+    private string gameState;
+    private GameObject gameManager;
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (takingInput)
+        gameState = gameManager.GetComponent<StateChangeManager>().GetState();
+        if (takingInput && (gameState == "playing"))
         {
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
