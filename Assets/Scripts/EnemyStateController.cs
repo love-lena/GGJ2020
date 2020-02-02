@@ -26,7 +26,8 @@ public class EnemyStateController : MonoBehaviour
     //be in a static class
     public enum EnemyState
     {
-        chasing, afraid, resting, attacking, gettingSucked, speaking, notAggressive, dead
+        chasing, afraid, resting, attacking, gettingSucked, 
+        speaking, notAggressive, dead
     }
 
     public EnemyState myState;
@@ -45,10 +46,10 @@ public class EnemyStateController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        print("enemy collision occurred");
+        // print("enemy collision occurred");
         if (other.gameObject.tag == "Player")
         {
-            print("enemy collision with player");
+            // print("enemy collision with player");
             if(Vector2.Distance(transform.position, other.transform.position) < eyesight)
             {
                 faceSeen = true;
@@ -63,7 +64,7 @@ public class EnemyStateController : MonoBehaviour
         //and determines if a state change is necessary
         stateMachine();
         currSpeed = enemyMovementController.getSpeed();
-        Debug.Log("currSpeed" + currSpeed);
+        // Debug.Log("currSpeed" + currSpeed);
         currDir = enemyMovementController.getDir();
         enemyMover.SetMovement(currDir, currSpeed);
     }
@@ -140,6 +141,11 @@ public class EnemyStateController : MonoBehaviour
         }
         enemyMovementController.setStationary(stationary);
         enemyMovementController.setScared(scared);
+    }
+
+    public void SetState(EnemyState newState) 
+    {
+        myState = newState;
     }
 
 }

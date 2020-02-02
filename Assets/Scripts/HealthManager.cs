@@ -11,12 +11,14 @@ public class HealthManager : MonoBehaviour
 	public bool dead = false;
 	public bool sucking = false;
 	public EnemyHealth sucker = null;
+	public SuckingEnemy suckingEnemy = null;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		health = maxHealth;
 		dead = false;
+		suckingEnemy = gameObject.GetComponent<SuckingEnemy>();
 	}
 
 	public void Restart() {
@@ -49,12 +51,17 @@ public class HealthManager : MonoBehaviour
 	}
 
 	public void StartSucking(EnemyHealth enemy) {
+		Debug.Log("Start the succ");
+
 		enemy.StartSucking();
+		suckingEnemy.StartSucking();
 		sucker = enemy;
 	}
 
 	public void StopSucking() {
 		sucker.StopSucking();
+		suckingEnemy.StopSucking();
+		// Destroy(sucker);
 		sucker = null;
 	}
 

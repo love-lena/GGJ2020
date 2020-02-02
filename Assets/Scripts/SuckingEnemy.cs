@@ -16,12 +16,19 @@ public class SuckingEnemy : MonoBehaviour
 
     void Update() { }
 
+    public void StartSucking() {
+        isSucking = true;
+    }
+
+    public void StopSucking() {
+        isSucking = false;
+    }
+
     //Goes on player
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!isSucking && collider.gameObject.tag.Equals("enemy"))
+        if (isSucking && collider.gameObject.tag.Equals("enemy"))
         {
-            isSucking = true;
             healthManager.StartSucking(collider.gameObject.GetComponent<EnemyHealth>());
         }
     }
@@ -30,7 +37,7 @@ public class SuckingEnemy : MonoBehaviour
     {
         if (isSucking && collider.gameObject.tag.Equals("enemy"))
         {
-            isSucking = false;
+            StopSucking();
             healthManager.StopSucking();
         }
     }

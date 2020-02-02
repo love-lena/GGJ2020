@@ -28,6 +28,8 @@ public class ClickAttackMovement : MonoBehaviour
         {
             StartCoroutine("Attack");
             StartCoroutine("Cooldown");
+        } else if (Input.GetMouseButtonUp(0) && ! canAttack && (gameState == "playing")) {
+            StopCoroutine("Attack");
         }
     }
 
