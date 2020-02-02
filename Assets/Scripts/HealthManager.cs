@@ -11,7 +11,6 @@ public class HealthManager : MonoBehaviour
 	public bool dead = false;
 	public bool sucking = false;
 	public EnemyHealth sucker = null;
-	private float suckRate = 0f;
 
 	// Start is called before the first frame update
 	void Start()
