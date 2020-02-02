@@ -10,6 +10,9 @@ TagManager:
   - HealthBar
   - GameManager
   - Weapon
+  - Enemies
+  - Spawner
+  - Level
   layers:
   - Default
   - TransparentFX

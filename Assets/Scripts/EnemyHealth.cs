@@ -20,6 +20,8 @@ public class EnemyHealth : MonoBehaviour
 
     private EnemyStateController state;
 
+    private EnemySpawner spawner;
+
     // Start is called before the first frame update
     void Start() 
     {
@@ -29,6 +31,7 @@ public class EnemyHealth : MonoBehaviour
         suckLeft = suckInfo.y;
         suckDamage = suckInfo.z;
         state = gameObject.GetComponent<EnemyStateController>();
+        spawner = GameObject.FindWithTag("Level").GetComponent<EnemySpawner>();
     }
 
     // Update is called once per frame
@@ -37,13 +40,14 @@ public class EnemyHealth : MonoBehaviour
     public void StartSucking() {
         gettingSucked = true;
         state.SetState(EnemyStateController.EnemyState.gettingSucked);
-        Debug.Log("Starting the succ");
+        // Debug.Log("Starting the succ");
     }
 
     public void StopSucking() {
         suckLeft = 0f;
         gettingSucked = false;
         state.SetState(EnemyStateController.EnemyState.dead);
+        spawner.SpawnEnemy();
     }
 
     public float Sucked(float delta) {
