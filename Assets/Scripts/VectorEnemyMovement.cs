@@ -30,10 +30,12 @@ public class VectorEnemyMovement : MonoBehaviour, EnemyMovementInterface
     private bool stationary;
 
     private float scaredMult;
+    private float speedMult;
     // Start is called before the first frame update
     void Start()
     {
         scaredMult = chaseWeight;
+        speedMult = 1f;
         stationary = false;
         player = GameObject.FindGameObjectWithTag("Player");
         circleHits = GetComponent<CircleHits>();
@@ -54,7 +56,7 @@ public class VectorEnemyMovement : MonoBehaviour, EnemyMovementInterface
     {
         if (!stationary)
         {
-            return amScared ? fearSpeed : chaseSpeed;
+            return speedMult * (amScared ? fearSpeed : chaseSpeed);
         }
         return 0f;
     }
@@ -91,6 +93,10 @@ public class VectorEnemyMovement : MonoBehaviour, EnemyMovementInterface
     {
         stationary = newStationary;
 
+    }
+    public void setSpeedMultiplier(float mult)
+    {
+        
     }
     
     private Vector2 getPlayerVector()

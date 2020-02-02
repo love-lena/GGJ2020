@@ -14,6 +14,9 @@ public class HealthManager : MonoBehaviour
 	public SuckingEnemy suckingEnemy = null;
 	private PlayerMovement playerMovement;
 
+    [SerializeField]
+    private float hurtDamage = 3f;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -81,4 +84,10 @@ public class HealthManager : MonoBehaviour
 		}
 		return ammount;
 	}
+    public void GetHit()
+    {
+        health -= hurtDamage;
+    }
+
+
 }
