@@ -34,11 +34,8 @@ public class EnemyStateController : MonoBehaviour
 
     private float attackTime = 0.5f;
     private EnemyWeapon weapon;
-<<<<<<< HEAD
     private Animator enemyAnimator;
-=======
     private bool bloodSpawned = false;
->>>>>>> fixed particle emission
 
     //putting this here, we could totally  refactor it to
     //be in a static class
