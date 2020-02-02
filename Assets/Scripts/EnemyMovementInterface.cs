@@ -7,4 +7,5 @@ public interface EnemyMovementInterface
     Vector2 getDir();
     float getSpeed();
     void setScared(bool scared);
+    void setStationary(bool stationary);
 }

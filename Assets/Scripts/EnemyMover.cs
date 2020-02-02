@@ -18,7 +18,7 @@ public class EnemyMover : MonoBehaviour
     }
 
     public void SetMovement(Vector2 newNormalizeDirection, float newSpeed){
-        normalizeDirection = new Vector3(newNormalizeDirection.x, newNormalizeDirection.y, 0);
+        normalizeDirection = new Vector3(newNormalizeDirection.x, newNormalizeDirection.y, 0).normalized;
         speed = newSpeed;
     }
 }

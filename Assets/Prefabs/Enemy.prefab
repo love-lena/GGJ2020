@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 5796959827168743150}
   - component: {fileID: 219800968}
   - component: {fileID: 2065337221}
-  - component: {fileID: 816374888551603775}
-  - component: {fileID: 2775340326094904915}
-  - component: {fileID: 5912321205565833111}
+  - component: {fileID: 8866846054563379486}
+  - component: {fileID: 5073987855317426340}
+  - component: {fileID: 4087859014676291102}
   - component: {fileID: 7890443941370505534}
+  - component: {fileID: 8368121762797522247}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.04, y: 0.04}
+  m_Size: {x: 0.26666668, y: 0.26666668}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -102,7 +103,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.19
 --- !u!50 &2065337221
 Rigidbody2D:
   serializedVersion: 4
@@ -124,7 +125,26 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &816374888551603775
+--- !u!114 &8866846054563379486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8318236968270894984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047f2c328116f4e5d988e3f58c0cbf9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAvoidanceWeight: 3
+  wallAvoidanceWeight: 3
+  minSpacingAvoidanceWeight: 0.1
+  fearWeight: 6
+  chaseWeight: 1
+  fearSpeed: 3
+  chaseSpeed: 2
+--- !u!114 &5073987855317426340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +160,7 @@ MonoBehaviour:
   suckRate: 0
   suckLeft: 0
   gettingSucked: 0
---- !u!114 &2775340326094904915
+--- !u!114 &4087859014676291102
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,19 +173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalizeDirection: {x: 0, y: 0, z: 0}
---- !u!114 &5912321205565833111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8318236968270894984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 943c47fe058f1439c89e3d50bb23ae8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
 --- !u!114 &7890443941370505534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,4 +186,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scared: 0
-  eyesight: 0
+  stationary: 0
+  eyesight: 3
+  timeSpentAfraid: 2
+  myState: 0
+--- !u!114 &8368121762797522247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8318236968270894984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc85f77e329eb44c4a43c42d8fea2cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 0
+  circleHits:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  numHits: 0

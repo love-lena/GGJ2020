@@ -14,56 +14,88 @@ public class VectorEnemyMovement : MonoBehaviour, EnemyMovementInterface
     private float wallAvoidanceWeight;
     [SerializeField]
     private float minSpacingAvoidanceWeight;
+    [SerializeField]
+    private float fearWeight;
+    [SerializeField]
+    private float chaseWeight;
+
+    [SerializeField]
+    private float fearSpeed;
+
+    [SerializeField]
+    private float chaseSpeed;
+    private bool amScared;
+
+    private GameObject player;
+    private bool stationary;
+
+    private float scaredMult;
     // Start is called before the first frame update
     void Start()
     {
+        scaredMult = chaseWeight;
+        stationary = false;
+        player = GameObject.FindGameObjectWithTag("Player");
         circleHits = GetComponent<CircleHits>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        getMoveVector(circleHits.checkSurroundings(), circleHits.getNumHits());
         
     }
 
     public Vector2 getDir()
     {
-        return Vector2.zero;
+        return getMoveVector(circleHits.checkSurroundings(), circleHits.getNumHits());
     }
 
     public float getSpeed()
     {
-        return 0;
+        if (!stationary)
+        {
+            return amScared ? fearSpeed : chaseSpeed;
+        }
+        return 0f;
     }
     private Vector2 getMoveVector(Collider2D[] hits, int hitNum)
     {
         Vector2 res = new Vector2();
         
-        //bool trailFound = false;
         for(int i = 0; i < hitNum; i ++)
         {
-            if (hits[i].tag == "Enemy") 
+            
+            if (hits[i].tag == "Enemy" && !(hits[i].gameObject.name == gameObject.name)) 
             {
                 res += getAvoidanceVector(hits[i].transform.position, hitNum, enemyAvoidanceWeight);
             }else if(hits[i].tag == "Wall"){
-
                 res += getAvoidanceVector(hits[i].transform.position, hitNum, wallAvoidanceWeight);
             }
         }
 
+        res += getPlayerVector();
         Debug.DrawLine(transform.position,
              transform.position + new Vector3(res.x, res.y, transform.position.z),
              Color.green,
-             2);
-        //res += getPlayerVector();
+             0.5f);
         return res;
 
     }
 
     public void setScared(bool scared)
     {
+        amScared = scared;
+        scaredMult = scared ? -fearWeight : chaseWeight;
+    }
+    public void setStationary(bool newStationary)
+    {
+        stationary = newStationary;
 
+    }
+    
+    private Vector2 getPlayerVector()
+    {
+        return scaredMult * (((Vector2) player.transform.position - (Vector2) transform.position)).normalized;
     }
 
     private Vector2 getAvoidanceVector(Vector2 avoidPos, int numAvoiding, float avoidanceWeight)
