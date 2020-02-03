@@ -489,8 +489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe2775317e1a554e90c75803942534b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAvoidanceWeight: 21.56
-  wallAvoidanceWeight: 3
+  enemyAvoidanceWeight: 21
+  wallAvoidanceWeight: 0
   minSpacingAvoidanceWeight: 0.1
   fearWeight: 6
   chaseWeight: 1

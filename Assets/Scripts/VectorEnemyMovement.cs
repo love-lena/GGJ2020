@@ -66,8 +66,7 @@ public class VectorEnemyMovement : MonoBehaviour, EnemyMovementInterface
         
         for(int i = 0; i < hitNum; i ++)
         {
-            
-            if (hits[i].tag == "Enemy" && !(hits[i].gameObject.name == gameObject.name) && 
+            if (hits[i].tag == "Enemy" && !GameObject.ReferenceEquals( hits[i].gameObject, gameObject) && 
                 !hits[i].gameObject.GetComponent<EnemyHealth>().gettingSucked) 
             {
                 res += getAvoidanceVector(hits[i].transform.position, hitNum, enemyAvoidanceWeight);
@@ -118,8 +117,6 @@ public class VectorEnemyMovement : MonoBehaviour, EnemyMovementInterface
         
         Vector2 res = (((addVec * avoidanceWeight) / numAvoiding) * distRatio);
          
-        //print(String.Format("name: {0} distance: {1} distRatio: {2} hitDif: {3} addVec: {4} \nnumAvoid: {5} weight: {6} res: {7} ",
-         //   gameObject.name, distance, distRatio, hitDif, addVec,numAvoiding, avoidanceWeight, res));
         return res; 
     }
 }

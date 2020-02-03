@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public int spawnSpread = 10;
-    System.Random rnd = new System.Random();
+    static System.Random rnd = new System.Random();
     Transform spawners;
 
     private int numOfSpawners;
@@ -17,17 +17,21 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawners = gameObject.transform.GetChild(0);
+        spawners = GameObject.FindWithTag("Spawner").transform;
         numOfSpawners =  spawners.childCount;
-        for (int i = 0; i < numberOfEnemies; i++) {
-            SpawnEnemy();
-        }
+        SpawnEnemy();
     }
 
-    public void SpawnEnemy() {
+    public void SingleEnemy() {
         Transform loc = spawners.GetChild(rnd.Next(0, numOfSpawners));
         Instantiate(enemyPrefab, loc.position + PositionOffset(), 
             loc.rotation, enemies.transform);
+    }
+
+    public void SpawnEnemy() {
+        for (int i = 0; i < numberOfEnemies; i++) {
+            SingleEnemy();
+        }
     }
 
     private Vector3 PositionOffset() {
@@ -42,14 +46,8 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    public void Spawn()
-    {
-
-    }
-
     public void CleanUp()
     {
-        Destroy(enemiesSpawned);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject enemy in enemies)
             GameObject.Destroy(enemy);

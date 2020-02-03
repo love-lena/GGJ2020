@@ -19,13 +19,11 @@ public class CameraEffects : MonoBehaviour
     {
         health = GameObject.FindGameObjectWithTag("GameManager").GetComponent<HealthManager>();
         maxHealth = health.GetMaxHealth();
-
-        
+        maxEffect = 5f;
     }
     void Update()
     {
         effectVal = (-maxEffect / maxHealth)*health.health + maxEffect;
-        print(string.Format("maxH: {0} maxEff: {1} effectVal: {2}", maxHealth, maxEffect, effectVal));
         _bloodLossMat.SetFloat("_LossAmnt", effectVal);
 
     }

@@ -23,10 +23,6 @@ public class SimpleEnemyMovement : MonoBehaviour, EnemyMovementInterface
         //1 for not scared, -1 for scared
         scaredMult = 1;
         player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-        {
-            print("player not found by enemy " + gameObject.name);
-        }
     }
 
     public Vector2 getDir()

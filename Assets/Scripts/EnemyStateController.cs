@@ -52,10 +52,6 @@ public class EnemyStateController : MonoBehaviour
         attackTime = weapon.activeTime;
         myState = EnemyState.chasing;
         enemyMovementController = GetComponent<EnemyMovementInterface>();
-        if(enemyMovementController == null)
-        {
-            // print("didn't find an enemy movement controller on gameobject " + gameObject.name);
-        }
         enemyMover = GetComponent<EnemyMover>();
         enemyAnimator = GetComponent<Animator>();
     }
@@ -63,8 +59,13 @@ public class EnemyStateController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
+        Debug.Log("SCARY: " + other.gameObject.tag);
+
+
+        
         if (other.gameObject.tag == "ScaryFace")
         {
+            Debug.Log("SCARY");
             faceSeen = true;
         }
     }

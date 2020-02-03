@@ -8,11 +8,9 @@ public class ClickAttackMovement : MonoBehaviour
     bool canAttack; 
     GameObject player;
     Transform playerTrans;
-    private float speed;
     private string gameState;
     private GameObject gameManager;
     public bool controllerInput = false;
-    private Coroutine attackCorInstance;
     public bool attacking = false;
     
     private float timeToAttack = 0.1f;
@@ -31,7 +29,6 @@ public class ClickAttackMovement : MonoBehaviour
         canAttack = true;
         player = this.gameObject;
         playerTrans = player.GetComponent<Transform>();
-        speed = 50.0F;
         gameManager = GameObject.Find("GameManager");
         playerAnimation = GetComponent<Animator>();
     }
@@ -83,7 +80,6 @@ public class ClickAttackMovement : MonoBehaviour
 
         
     }
-    public void StopAttack() { StopCoroutine(attackCorInstance); }
     private void EndAttack()
     {
         playerAnimation.SetBool("Attacking", false);

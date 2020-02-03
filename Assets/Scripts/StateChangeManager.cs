@@ -60,8 +60,9 @@ public class StateChangeManager : MonoBehaviour
             {
                 healthManager.Restart();
                 player.transform.position = new Vector3(3,0,0);
-                GetComponent<EnemySpawner>().CleanUp();
+                GameObject.FindWithTag("Spawner").transform.parent.GetComponent<EnemySpawner>().CleanUp();
                 endScreen.SetActive(false);
+                GameObject.FindWithTag("Spawner").transform.parent.GetComponent<EnemySpawner>().SpawnEnemy();
                 StartGame();
             }
         }

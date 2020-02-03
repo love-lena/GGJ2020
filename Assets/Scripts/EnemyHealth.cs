@@ -47,7 +47,7 @@ public class EnemyHealth : MonoBehaviour
         suckLeft = 0f;
         gettingSucked = false;
         state.SetState(EnemyStateController.EnemyState.dead);
-        spawner.SpawnEnemy();
+        spawner.SingleEnemy();
     }
 
     public float Sucked(float delta) {
