@@ -22,9 +22,11 @@ public class EnemyWeapon : MonoBehaviour
     public float weaponRange;
 
     public Collider2D coll;
+    private AudioSource weaponAudio;
     // Start is called before the first frame update
     void Start()
     {
+        weaponAudio = GetComponent<AudioSource>();
         isAttacking = false;
         attackStartPosition = gameObject.transform.localPosition;
         attackStartRotation = gameObject.transform.localRotation;
@@ -65,7 +67,7 @@ public class EnemyWeapon : MonoBehaviour
 
     public void attack()
     {
-
+        weaponAudio.Play();
         wepRotLtId = LeanTween.rotateLocal(gameObject, endAttack.localEulerAngles, rotTime).id;
         wepPosLtId = LeanTween.moveLocal(gameObject, endAttack.localPosition, movTime).id;
         StartCoroutine("weaponDisable");
