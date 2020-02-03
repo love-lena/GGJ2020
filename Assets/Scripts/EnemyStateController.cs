@@ -144,7 +144,7 @@ public class EnemyStateController : MonoBehaviour
                     attackCooldownTimer = attackCooldownTime;
                     weapon.attack();
                     enemyAnimator.SetBool("Attacking", true);
-                    Invoke("StopAttacking", .3f);
+                    Invoke("StopAttacking", .5f);
                 }
                 if (Vector2.Distance(player.transform.position, transform.position) > weaponRange)
                 {

@@ -222,7 +222,7 @@ MonoBehaviour:
 
     Game Over
 
-    Click "R" to Restart'
+    Press X to Restart'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40f05385a86834ef6ad47e50f42fad11, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 40f05385a86834ef6ad47e50f42fad11, type: 2}
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2017588598290133987}
-    characterCount: 31
+    characterCount: 29
     spriteCount: 0
     spaceCount: 6
     wordCount: 7

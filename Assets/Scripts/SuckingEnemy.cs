@@ -80,6 +80,7 @@ public class SuckingEnemy : MonoBehaviour
         Vector2 pushForce = transform.position - source.position;
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2();
         gameObject.GetComponent<Rigidbody2D>().AddForce(pushForce.normalized * knockBackAmount);
+        gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
     }
 
     private IEnumerator DisableMovementKnockback() {

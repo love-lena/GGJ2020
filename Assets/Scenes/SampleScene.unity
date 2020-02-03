@@ -184,6 +184,10 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 3.3333333
       objectReference: {fileID: 0}
+    - target: {fileID: 1880447805, guid: 94dfe5a457120c948a36f3f1aa4f70bf, type: 3}
+      propertyPath: m_AngularDrag
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 838730892215490689, guid: 94dfe5a457120c948a36f3f1aa4f70bf,
         type: 3}
       propertyPath: m_Name
@@ -1494,9 +1498,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d6d75597bbf194af68b725f3149ad4f9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fd77e3784edf44d968100645e5d2d804, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.369
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2830,6 +2834,31 @@ PrefabInstance:
     - target: {fileID: 7832973115907916043, guid: b5f9e95f831bc48e2878a8e217bee0f8,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164043920311500674, guid: b5f9e95f831bc48e2878a8e217bee0f8,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164043920311500674, guid: b5f9e95f831bc48e2878a8e217bee0f8,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164043920311500674, guid: b5f9e95f831bc48e2878a8e217bee0f8,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164043920311500674, guid: b5f9e95f831bc48e2878a8e217bee0f8,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164043920311500674, guid: b5f9e95f831bc48e2878a8e217bee0f8,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
